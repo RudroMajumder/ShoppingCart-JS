@@ -81,14 +81,19 @@
 
       // MINUS BUTTON HANDLER FOR IPHONE 11
          minusButton('minus-btn1',"product-id1",'iphone-price',1219.00);
+
       // MINUS BUTTON HANDLER FOR IPHONE 11 CASE
          minusButton('minus-btn2',"product-id2","iphone-case-price",59.00);
+
       // PLUS BUTTON HANDLER FOR IPHONE 11
          plusButton ('plus-btn1',"product-id1",'iphone-price',1219.00);
+
       // PLUS BUTTON HANDLER FOR IPHONE 11 CASE
          plusButton ('plus-btn2',"product-id2","iphone-case-price",59.00);
+
       // IPHONE REMOVER
       removeItem('remove-iphone',"iphone");
+
       // CASE REMOVER
       removeItem('remove-case',"case");
 
@@ -97,27 +102,50 @@
                const minus = document.getElementById(id);
                minus.addEventListener('click',function(){
                const productCount = document.getElementById(productId).value;
-               const counter = parseFloat(productCount);
+               const counter = parseInt(productCount);
                const totalItem =  counter - 1;
                document.getElementById(productId).value = totalItem;
-               const totalPrice1 = totalItem*price;
-               document.getElementById(product).innerText = totalPrice1;
-               return totalPrice1;
+               const totalPrice = totalItem*price;
+               document.getElementById(product).innerText = totalPrice;
+               operation();
+
             })
             }
+            
          // PLUS BUTTON HANDLER
             function plusButton(id,productId,product,price) {
                const plus = document.getElementById(id);
                plus.addEventListener('click',function(){
                const productCount = document.getElementById(productId).value;
-               const counter = parseFloat(productCount);
+               const counter = parseInt(productCount);
                const totalItem =  counter + 1;
                document.getElementById(productId).value = totalItem;
-               const totalPrice2 = totalItem*price;
-               document.getElementById(product).innerText = totalPrice2;
-               return totalPrice2;
+               const totalPrice = totalItem*price;
+               document.getElementById(product).innerText = totalPrice;
+               operation();
+
             })
             }
+            function operation(){
+               const phonePrice = document.getElementById('iphone-price').innerText;
+               const phoneCost = parseFloat(phonePrice);
+               const casePrice = document.getElementById('iphone-case-price').innerText;
+               const caseCost = parseFloat(casePrice);
+               const subTotal = phoneCost + caseCost;
+               document.getElementById('sub-total').innerText = subTotal;
+               const tax = (subTotal*10)/100;
+               document.getElementById('tax').innerText = tax;
+               const total = subTotal+tax;
+               document.getElementById('total').innerText = total;
+            }
+
+            function itemCounter(productId) {
+            const productCount = document.getElementById(productId).value;
+            const counter = parseFloat(productCount);
+            const totalItem =  counter + 1;
+            return totalItem;
+            }
+
          // REMOVE FUNCTION
             function removeItem(id1,id2) {
                const removeItem = document.getElementById(id1);
@@ -125,17 +153,6 @@
                   const remove =  document.getElementById(id2);
                   remove.style.display = "none";
                })
-            }
-         // SUBTOTAL
-            function subTotal( ) {
-               const subPrice = document.getElementById('sub-total').innerText;
-               const priceWIthoutTax = parseFloat(subPrice);
-               const iphoneValue = document.getElementById('iphone-price').innerText;
-               const iphonePrice = parseFloat(iphoneValue);
-               const caseValue = document.getElementById('iphone-case-price').innerText;
-               const casePrice = parseFloat(caseValue);
-               const subTotal = iphonePrice + casePrice;
-               document.getElementById('sub-total').innerText = subTotal;
             }
    </script>
 </body>
